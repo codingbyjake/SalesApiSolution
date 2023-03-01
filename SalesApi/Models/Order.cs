@@ -10,6 +10,8 @@ namespace SalesApi.Models {
         public string Description { get; set; } = string.Empty;
         [Column(TypeName = "decimal(7,2)")]
         public decimal Total { get; set; } = 0;
+        [StringLength(20)]
+        public string Status { get; set; } = "NEW";
 
         public int? CustomerId { get; set; } = null;
         public virtual Customer? Customer { get; set; }

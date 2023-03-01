@@ -127,6 +127,11 @@ namespace SalesApi.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
                     b.Property<decimal>("Total")
                         .HasColumnType("decimal(7,2)");
 
@@ -134,7 +139,7 @@ namespace SalesApi.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Order");
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("SalesApi.Models.OrderLine", b =>
@@ -160,7 +165,7 @@ namespace SalesApi.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderLine");
+                    b.ToTable("OrderLines");
                 });
 
             modelBuilder.Entity("SalesApi.Models.Order", b =>

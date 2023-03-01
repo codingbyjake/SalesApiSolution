@@ -19,6 +19,18 @@ namespace SalesApi.Controllers
         {
             _context = context;
         }
+        // GET: api/Employees
+        // ****handmade Employee Login
+        [HttpGet("login/{email}/{password}")]
+        public async Task<ActionResult<Employee>> EmployeeLogin(string email, string password){
+            var employee = await _context.Employees
+                                            .SingleOrDefaultAsync(x => (x.Email == email)
+                                                            && (x.Password == password));
+            if (employee == null) {
+                return NotFound();
+            }
+            return employee;
+        }
 
         // GET: api/Employees
         [HttpGet]

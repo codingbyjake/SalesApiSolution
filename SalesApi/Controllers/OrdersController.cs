@@ -12,7 +12,7 @@ namespace SalesApi.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class OrdersController : ControllerBase
-    {
+    {//start of class
         private readonly SalesDbContext _context;
 
         public OrdersController(SalesDbContext context)
@@ -24,14 +24,14 @@ namespace SalesApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Order>>> GetOrder()
         {
-            return await _context.Order.ToListAsync();
+            return await _context.Orders.ToListAsync();
         }
 
         // GET: api/Orders/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Order>> GetOrder(int id)
         {
-            var order = await _context.Order.FindAsync(id);
+            var order = await _context.Orders.FindAsync(id);
 
             if (order == null)
             {
@@ -39,6 +39,14 @@ namespace SalesApi.Controllers
             }
 
             return order;
+        }
+        //****hand made method
+        // PUT: api/Orders/complete/5
+        // Set Active Property To complete
+        [HttpPut("complete/{id}")]
+        public async Task<IActionResult> CompleteOrder(int id, Order order) {
+            order.Status = "COMPLETE";
+            return await PutOrder(id, order);
         }
 
         // PUT: api/Orders/5
@@ -77,7 +85,7 @@ namespace SalesApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Order>> PostOrder(Order order)
         {
-            _context.Order.Add(order);
+            _context.Orders.Add(order);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetOrder", new { id = order.Id }, order);
@@ -87,13 +95,13 @@ namespace SalesApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteOrder(int id)
         {
-            var order = await _context.Order.FindAsync(id);
+            var order = await _context.Orders.FindAsync(id);
             if (order == null)
             {
                 return NotFound();
             }
 
-            _context.Order.Remove(order);
+            _context.Orders.Remove(order);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -101,7 +109,7 @@ namespace SalesApi.Controllers
 
         private bool OrderExists(int id)
         {
-            return _context.Order.Any(e => e.Id == id);
+            return _context.Orders.Any(e => e.Id == id);
         }
-    }
+    }//end of class
 }

@@ -12,8 +12,8 @@ using SalesApi.Models;
 namespace SalesApi.Migrations
 {
     [DbContext(typeof(SalesDbContext))]
-    [Migration("20230301143202_added-o-ol-to-dbcontext")]
-    partial class addedooltodbcontext
+    [Migration("20230301173819_another-init")]
+    partial class anotherinit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -129,6 +129,11 @@ namespace SalesApi.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
                     b.Property<decimal>("Total")
                         .HasColumnType("decimal(7,2)");
 
@@ -136,7 +141,7 @@ namespace SalesApi.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Order");
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("SalesApi.Models.OrderLine", b =>
@@ -162,7 +167,7 @@ namespace SalesApi.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderLine");
+                    b.ToTable("OrderLines");
                 });
 
             modelBuilder.Entity("SalesApi.Models.Order", b =>

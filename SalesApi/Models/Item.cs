@@ -8,7 +8,7 @@ namespace SalesApi.Models {
         [StringLength(30)]
         public string Name { get; set; } = string.Empty;
         [Column(TypeName = "decimal (7,2)")]
-        public decimal Price { get; set; }
+        public decimal Price { get; set; } = 0;
 
 
 

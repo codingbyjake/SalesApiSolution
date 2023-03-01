@@ -24,14 +24,14 @@ namespace SalesApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<OrderLine>>> GetOrderLine()
         {
-            return await _context.OrderLine.ToListAsync();
+            return await _context.OrderLines.ToListAsync();
         }
 
         // GET: api/OrderLines/5
         [HttpGet("{id}")]
         public async Task<ActionResult<OrderLine>> GetOrderLine(int id)
         {
-            var orderLine = await _context.OrderLine.FindAsync(id);
+            var orderLine = await _context.OrderLines.FindAsync(id);
 
             if (orderLine == null)
             {
@@ -77,7 +77,7 @@ namespace SalesApi.Controllers
         [HttpPost]
         public async Task<ActionResult<OrderLine>> PostOrderLine(OrderLine orderLine)
         {
-            _context.OrderLine.Add(orderLine);
+            _context.OrderLines.Add(orderLine);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetOrderLine", new { id = orderLine.Id }, orderLine);
@@ -87,13 +87,13 @@ namespace SalesApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteOrderLine(int id)
         {
-            var orderLine = await _context.OrderLine.FindAsync(id);
+            var orderLine = await _context.OrderLines.FindAsync(id);
             if (orderLine == null)
             {
                 return NotFound();
             }
 
-            _context.OrderLine.Remove(orderLine);
+            _context.OrderLines.Remove(orderLine);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -101,7 +101,7 @@ namespace SalesApi.Controllers
 
         private bool OrderLineExists(int id)
         {
-            return _context.OrderLine.Any(e => e.Id == id);
+            return _context.OrderLines.Any(e => e.Id == id);
         }
     }
 }

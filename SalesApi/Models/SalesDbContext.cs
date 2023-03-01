@@ -12,9 +12,9 @@ namespace SalesApi.Models {
 
         public SalesDbContext(DbContextOptions<SalesDbContext> options) : base(options) { }
 
-        public DbSet<SalesApi.Models.Order> Order { get; set; }
+        //public DbSet<SalesApi.Models.Order> Order { get; set; }
 
-        public DbSet<SalesApi.Models.OrderLine> OrderLine { get; set; }
+        //public DbSet<SalesApi.Models.OrderLine> OrderLine { get; set; }
 
 
     }
