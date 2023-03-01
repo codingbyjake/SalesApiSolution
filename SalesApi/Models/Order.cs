@@ -9,9 +9,9 @@ namespace SalesApi.Models {
         [StringLength(30)]
         public string Description { get; set; } = string.Empty;
         [Column(TypeName = "decimal(7,2)")]
-        public decimal Total { get; set; }
+        public decimal Total { get; set; } = 0;
 
-        public int CustomerId { get; set; }
+        public int? CustomerId { get; set; } = null;
         public virtual Customer? Customer { get; set; }
 
         public virtual ICollection<OrderLine>? OrderLines { get; set; }
