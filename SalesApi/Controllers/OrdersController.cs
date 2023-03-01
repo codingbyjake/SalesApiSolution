@@ -31,7 +31,10 @@ namespace SalesApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Order>> GetOrder(int id)
         {
-            var order = await _context.Orders.FindAsync(id);
+            var order = await _context.Orders
+                                        .Include(x => x.OrderLines)
+                                            .ThenInclude(x => x.Item)
+                                        .SingleOrDefaultAsync(x => x.Id == id);
 
             if (order == null)
             {

@@ -1,4 +1,6 @@
-﻿namespace SalesApi.Models {
+﻿using System.Text.Json.Serialization;
+
+namespace SalesApi.Models {
     public class OrderLine {
         //PK and Class properties
         public int Id { get; set; }
@@ -6,9 +8,10 @@
 
         //FK's and virtual properties
         public int OrderId { get; set; }
-        public virtual Order Order { get; set; } = null!;
+        [JsonIgnore]
+        public virtual Order? Order { get; set; } = null!;
 
         public int ItemId { get; set; }
-        public virtual Item Item { get; set; } = null!;
+        public virtual Item? Item { get; set; } = null!;
     }
 }
